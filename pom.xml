@@ -21,6 +21,12 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>5.2.9.RELEASE</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-dependencies</artifactId>
 			<version>Hoxton.RELEASE</version>
@@ -49,6 +55,24 @@
 			<version>3.4.0</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatis-plus-annotation</artifactId>
+			<version>3.4.0</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.12</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatis-plus-core</artifactId>
+			<version>3.4.0</version>
+			<scope>compile</scope>
+		</dependency>
 		<!--代码生成器依赖-->
 		<dependency>
 			<groupId>com.baomidou</groupId>
@@ -57,18 +81,20 @@
 		</dependency>
 		<!--模板引擎依赖-->
 		<!-- velocity 默认模板引擎, Mybatis Plus 代码生成器需要 -->
-		<dependency>
-			<groupId>org.apache.velocity</groupId>
-			<artifactId>velocity-engine-core</artifactId>
-			<version>${velocity.version}</version>
-		</dependency>
 
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<version>2.3.30</version>
+		</dependency>
 		<!--swagger-->
 		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger2</artifactId>
-			<version>${swagger.version}</version>
+			<groupId>io.swagger</groupId>
+			<artifactId>swagger-annotations</artifactId>
+			<version>1.5.13</version>
+			<scope>compile</scope>
 		</dependency>
+
 		<!--swagger ui-->
 		<dependency>
 			<groupId>io.springfox</groupId>
