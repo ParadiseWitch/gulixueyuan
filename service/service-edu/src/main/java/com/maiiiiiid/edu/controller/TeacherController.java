@@ -4,9 +4,7 @@ package com.maiiiiiid.edu.controller;
 import com.maiiiiiid.edu.entity.Teacher;
 import com.maiiiiiid.edu.service.ITeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,8 +23,22 @@ public class TeacherController {
 	@Autowired
 	private ITeacherService iTeacherService;
 
+	/**
+	 * 查询所有导师
+	 * @return
+	 */
 	@GetMapping("findAll")
 	public List<Teacher> findAllTeacher() {
 		return iTeacherService.list();
+	}
+
+	/**
+	 * 逻辑删除讲师
+	 * @param id
+	 * @return
+	 */
+	@DeleteMapping("delete/{id}")
+	public boolean removeTeacher(@PathVariable("id")Integer id) {
+		return iTeacherService.removeById(id);
 	}
 }
