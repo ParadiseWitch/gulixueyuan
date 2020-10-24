@@ -37,7 +37,7 @@ public class TeacherController {
 	 * @param id
 	 * @return
 	 */
-	@DeleteMapping("delete/{id}")
+	@DeleteMapping("{id}")
 	public boolean removeTeacher(@PathVariable("id")Integer id) {
 		return iTeacherService.removeById(id);
 	}
