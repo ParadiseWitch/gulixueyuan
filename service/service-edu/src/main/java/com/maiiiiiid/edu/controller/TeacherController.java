@@ -1,6 +1,7 @@
 package com.maiiiiiid.edu.controller;
 
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.maiiiiiid.commonutils.Result;
 import com.maiiiiiid.commonutils.StatusCode;
 import com.maiiiiiid.edu.entity.Teacher;
@@ -10,7 +11,6 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.ResultSet;
 import java.util.List;
 
 /**
@@ -45,11 +45,30 @@ public class TeacherController {
 	 * @return
 	 */
 	@ApiOperation(value = "根据ID删除讲师")
-	@DeleteMapping("delete/{id}")
+	@DeleteMapping("{id}")
 	public Result removeTeacher(
 			@ApiParam(name = "id", value = "讲师ID", required = true)
 			@PathVariable("id")Integer id) {
 		boolean success = iTeacherService.removeById(id);
 		return new Result(true,StatusCode.OK,"删除ID为" + id + "的讲师成功!") ;
+	}
+
+
+	/**
+	 * 分页查询讲师数据
+	 * @param pagenum
+	 * @param limit
+	 * @return
+	 */
+	@GetMapping("{page}/{limit}")
+	public Result<Page<Teacher>> pagelist(
+			@ApiParam("当前页数")
+			@PathVariable("page") Long pagenum,
+			@ApiParam("每页显示条目数")
+			@PathVariable("limit") Long limit
+	) {
+		Page<Teacher> page = new Page<>(pagenum,limit);
+		iTeacherService.page(page);
+		return new Result<Page<Teacher>>(true,StatusCode.OK,"当前查询第"+pagenum+"页成功!",page);
 	}
 }
