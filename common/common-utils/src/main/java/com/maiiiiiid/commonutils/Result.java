@@ -1,10 +1,7 @@
 package com.maiiiiiid.commonutils;
 
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,6 +15,7 @@ import java.util.Map;
  */
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @RequiredArgsConstructor
 public class Result<T> {
 	@NonNull
@@ -35,4 +33,10 @@ public class Result<T> {
 	@ApiModelProperty(value = "返回数据")
 	private T data;
 
+	public Result ok(String message){
+		this.setSuccess(true);
+		this.setCode(StatusCode.OK);
+		this.setMessage(message);
+		return this;
+	}
 }

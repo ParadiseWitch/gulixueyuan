@@ -7,12 +7,14 @@ import com.maiiiiiid.commonutils.StatusCode;
 import com.maiiiiiid.edu.entity.Teacher;
 import com.maiiiiiid.edu.query.TeacherQuery;
 import com.maiiiiiid.edu.service.ITeacherService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.ResultSet;
 import java.util.List;
 
 /**
@@ -89,4 +91,51 @@ public class TeacherController {
 		iTeacherService.pageQuery(page,teacherQuery);
 		return new Result<Page<Teacher>>(true,StatusCode.OK,"当前查询第"+pagenum+"页成功!",page);
 	}
+
+
+	/**
+	 * 新增讲师
+	 * @param teacher
+	 * @return
+	 */
+	@ApiOperation(value = "新增讲师")
+	@PostMapping
+	public Result save(
+			@ApiParam(name = "teacher",value = "讲师对象",required = true)
+			@RequestBody
+			Teacher teacher
+	){
+		iTeacherService.save(teacher);
+		return new Result().ok("新增讲师成功!");
+	}
+
+	/**
+	 * 根据ID查询讲师
+	 * @param id
+	 * @return
+	 */
+	@ApiOperation(value = "根据ID查询讲师")
+	@GetMapping("{id}")
+	public Result<Teacher> getByID(
+			@ApiParam(name = "id",value = "讲师ID", required = true)
+			@PathVariable("id") String id
+	){
+		Teacher teacher = iTeacherService.getById(id);
+		return new Result<Teacher>(true,StatusCode.OK,"查询id为"+id+"的讲师成功!",teacher);
+	}
+
+	@ApiOperation(value = "根据ID修改讲师信息")
+	@PutMapping("{id}")
+	public Result updateByID(
+			@ApiParam(name = "id",value = "讲师ID",required = true)
+			@PathVariable("id") String id,
+
+			@ApiParam(name = "teacher", value = "讲师对象", required = true)
+			@RequestBody Teacher teacher
+	){
+		teacher.setId(id);
+		iTeacherService.updateById(teacher);
+		return new Result().ok("成功修改id为"+id+"的讲师信息!");
+	}
+
 }
