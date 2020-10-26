@@ -11,5 +11,12 @@
 
 	<artifactId>service-base</artifactId>
 
+	<dependencies>
+		<dependency>
+			<artifactId>common-utils</artifactId>
+			<groupId>com.maiiiiiid</groupId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
 
 </project>

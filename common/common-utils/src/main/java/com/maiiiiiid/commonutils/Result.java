@@ -39,4 +39,11 @@ public class Result<T> {
 		this.setMessage(message);
 		return this;
 	}
+
+	public Result error(String message){
+		this.setSuccess(false);
+		this.setCode(StatusCode.ERROR);
+		this.setMessage(message);
+		return this;
+	}
 }

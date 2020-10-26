@@ -7,6 +7,7 @@ import com.maiiiiiid.commonutils.StatusCode;
 import com.maiiiiiid.edu.entity.Teacher;
 import com.maiiiiiid.edu.query.TeacherQuery;
 import com.maiiiiiid.edu.service.ITeacherService;
+import com.maiiiiiid.servicebase.exception.GuliException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -120,6 +121,12 @@ public class TeacherController {
 			@ApiParam(name = "id",value = "讲师ID", required = true)
 			@PathVariable("id") String id
 	){
+
+		try {
+			int i = 1/0;
+		} catch (Exception e) {
+			throw new GuliException(2001,"出现自定义异常");
+		}
 		Teacher teacher = iTeacherService.getById(id);
 		return new Result<Teacher>(true,StatusCode.OK,"查询id为"+id+"的讲师成功!",teacher);
 	}
